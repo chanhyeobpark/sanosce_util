@@ -1,20 +1,10 @@
-
-var express = require('express')
-,http = require('http')
-,bodyParser = require('body-parser');
-var app = express();
-app.use(bodyParser.urlencoded({extended: true}));
-//app.use(bodyParser.json());
-app.post("/", function( req, res){
-res.writeHead(200,{"Content-Type" : "text/plain"});
-//post데이터확인
-console.log(req.param('nickname',null));
-console.log(req.param('job',null));
-res.end('test');
+var express        = require( 'express' );
+var http           = require( 'http' );
+var app            = express();
+app.set( 'port', process.env.PORT || 3001 );
+app.get('/', function (req, res) {
+    res.send('Hello World');
 });
-app.use(function( req, res){
-res.writeHead(404,{"Content-Type" : "text/plain"});
-res.end('404 ERROR');
+http.createServer( app ).listen( app.get( 'port' ), function (){
+  console.log( 'Express server listening on port ' + app.get( 'port' ));
 });
-http.createServer(app).listen(process.env.PORT);
-
